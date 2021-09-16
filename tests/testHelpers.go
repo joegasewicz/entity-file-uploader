@@ -14,11 +14,11 @@ func ImageTestHelper(t *testing.T) (*io.PipeReader, *multipart.Writer) {
 	writer := multipart.NewWriter(pw)
 	go func() {
 		defer writer.Close()
-		part, err := writer.CreateFormFile("catPic", "catpic.png")
+		part, err := writer.CreateFormFile("catPic", "cat.txt")
 		if err != nil {
 			t.Error(err)
 		}
-		catFile, _ := os.Open("./catpic.png")
+		catFile, _ := os.Open("./cat.txt")
 		defer catFile.Close()
 		cat, _ := png.Decode(catFile)
 		err = png.Encode(part, cat)

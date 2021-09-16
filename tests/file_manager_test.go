@@ -16,7 +16,7 @@ var TEST_FILE_PATH = TEST_ROOT_PATH + "/uploads/cats/1/catpic.png"
 func setUp() {
 	// Copy the local catpic.png to the entity destination directory
 	os.MkdirAll(TEST_DIR_PATH, os.ModePerm)
-	file, err := os.Open("catpic.png")
+	file, err := os.Open("cat.txt")
 	defer file.Close()
 	if err != nil {
 		println(err)
