@@ -11,7 +11,7 @@ import (
 
 var TEST_ROOT_PATH, _ = os.Getwd()
 var TEST_DIR_PATH = TEST_ROOT_PATH + "/uploads/cats/1"
-var TEST_FILE_PATH = TEST_ROOT_PATH + "/uploads/cats/1/catpic.png"
+var TEST_FILE_PATH = TEST_ROOT_PATH + "/uploads/cats/1/cat.txt"
 
 func setUp() {
 	// Copy the local catpic.png to the entity destination directory
@@ -39,7 +39,7 @@ func TestUpload(t *testing.T) {
 	fileUpload := entityfileuploader.FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
-		FileTypes:   []string{"png", "jpeg"},
+		FileTypes:   []string{"png", "jpeg", "txt"},
 	}
 
 	catUpload, _ := fileUpload.Init("cats")
@@ -72,7 +72,7 @@ func TestUpload(t *testing.T) {
 	}
 
 	if file.Name() != TEST_FILE_PATH {
-		t.Errorf("Expected 'catpic.png' but got '%v'", file.Name())
+		t.Errorf("Expected 'cat.txt' but got '%v'", file.Name())
 	}
 
 	tearDown()
@@ -83,15 +83,15 @@ func TestGet(t *testing.T) {
 	fileUpload := entityfileuploader.FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
-		FileTypes:   []string{"png", "jpeg"},
+		FileTypes:   []string{"png", "jpeg", "txt"},
 		URL:         "http://localhost:8080",
 	}
 
 	catUpload, _ := fileUpload.Init("cats")
 
 	catHandler := func(w http.ResponseWriter, r *http.Request) {
-		filePath := catUpload.Get("catpic.png", 1)
-		expected := "http://localhost:8080/uploads/cats/1/catpic.png"
+		filePath := catUpload.Get("cat.txt", 1)
+		expected := "http://localhost:8080/uploads/cats/1/cat.txt"
 		if filePath != expected {
 			t.Errorf("Expected '%v' but got '%v'", expected, filePath)
 		}
@@ -116,7 +116,7 @@ func TestUpdate(t *testing.T) {
 	}
 
 	catUpload, _ := fileUpload.Init("cats")
-	err := catUpload.Update("catpic.png", 1, "tomcat.png")
+	err := catUpload.Update("cat.txt", 1, "tomcat.png")
 	if err != nil {
 		t.Error(err)
 	}
@@ -138,7 +138,7 @@ func TestDelete(t *testing.T) {
 	}
 
 	catUpload, _ := fileUpload.Init("cats")
-	err := catUpload.Delete("catpic.png", 1)
+	err := catUpload.Delete("cat.txt", 1)
 	if err != nil {
 		t.Error(err)
 	}

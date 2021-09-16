@@ -10,7 +10,7 @@ func TestInit(t *testing.T) {
 	fileUpload := entityfileuploader.FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
-		FileTypes:   []string{"png", "jpeg"},
+		FileTypes:   []string{"png", "jpeg", "txt"},
 	}
 
 	_, err := fileUpload.Init("cats")
