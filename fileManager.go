@@ -49,10 +49,10 @@ func (f *FileManager) Upload(w http.ResponseWriter, r *http.Request, id uint, fo
 	var err error
 	r.ParseMultipartForm(50 << 20) // 50mb
 	file, handler, err := r.FormFile(formName)
-	defer file.Close()
 	if err != nil {
 		return "", err
 	}
+	defer file.Close()
 	fileName := handler.Filename
 	// Create file
 	// Default behavior is to overwrite file if filename is the same as incomming.
