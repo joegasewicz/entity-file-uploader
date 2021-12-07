@@ -5,7 +5,7 @@
 
 ### Changed
 
-**Release 0.0.4** - 2021-07-04
+**Release 0.0.4** - 2021-07-12
 - Handle bad access: nil dereference #2 🪲 [Issue #6](https://github.com/joegasewicz/entity-file-uploader/issues/6)
 
 
