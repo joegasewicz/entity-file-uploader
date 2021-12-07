@@ -47,13 +47,13 @@ func (f *FileManager) GetEntityFilePath(fullEntityDirPath string, fileName strin
 // with filename.
 func (f *FileManager) Upload(w http.ResponseWriter, r *http.Request, id uint, formName string) (string, error) {
 	var err error
-	// 10mb r.ParseMultipartForm(10 << 20) TODO
+	r.ParseMultipartForm(50 << 20)
 	file, handler, err := r.FormFile(formName)
-	fileName := handler.Filename
 	defer file.Close()
 	if err != nil {
 		return "", err
 	}
+	fileName := handler.Filename
 	// Create file
 	// Default behavior is to overwrite file if filename is the same as incomming.
 	fullPath, err := f.setEntityDirPath(id)
