@@ -72,3 +72,8 @@ err := CatUpload.Update(Cat.Avatar, Cat.ID, "tomcat.png")
 ```go
 err := CatUpload.Delete(Cat.Avatar, Cat.ID)
 ```
+
+### Handle file uploads over http for multipart formdata
+```go
+err := fileManager.ReceiveMultiPartFormDataAndSaveToDir(r, "logo", fileModel.ID)
+```
