@@ -1,4 +1,4 @@
-package tests
+package entityfileuploader
 
 import (
 	"image/png"

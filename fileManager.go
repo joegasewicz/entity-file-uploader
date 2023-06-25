@@ -103,3 +103,28 @@ func (f *FileManager) DeleteEntityByID(id uint) error {
 	err := os.RemoveAll(entityDirPath)
 	return err
 }
+
+// ReceiveMultiPartFormDataAndSaveToDir Handles a file uploaded via multipart form request over http
+// The field argument is the form field's name
+func (f *FileManager) ReceiveMultiPartFormDataAndSaveToDir(r *http.Request, field string, id uint) error {
+	r.ParseMultipartForm(50 << 20) // 50mb
+	file, header, err := r.FormFile(field)
+
+	fullPath, err := f.setEntityDirPath(id)
+	fullEntityFilePath := f.GetEntityFilePath(fullPath, header.Filename)
+
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	distFile, err := os.Create(fullEntityFilePath)
+	defer distFile.Close()
+	if err != nil {
+		return err
+	}
+	if _, err := io.Copy(distFile, file); err != nil {
+		return err
+	}
+	return nil
+}
