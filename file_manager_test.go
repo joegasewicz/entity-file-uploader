@@ -1,7 +1,6 @@
-package tests
+package entityfileuploader
 
 import (
-	entityfileuploader "github.com/joegasewicz/entity-file-uploader"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -36,7 +35,7 @@ func tearDown() {
 }
 
 func TestUpload(t *testing.T) {
-	fileUpload := entityfileuploader.FileUpload{
+	fileUpload := FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
 		FileTypes:   []string{"png", "jpeg", "txt"},
@@ -80,7 +79,7 @@ func TestUpload(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	setUp()
-	fileUpload := entityfileuploader.FileUpload{
+	fileUpload := FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
 		FileTypes:   []string{"png", "jpeg", "txt"},
@@ -109,7 +108,7 @@ func TestGet(t *testing.T) {
 
 func TestUpdate(t *testing.T) {
 	setUp()
-	fileUpload := entityfileuploader.FileUpload{
+	fileUpload := FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
 		FileTypes:   []string{"png", "jpeg"},
@@ -131,7 +130,7 @@ func TestUpdate(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	setUp()
-	fileUpload := entityfileuploader.FileUpload{
+	fileUpload := FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
 		FileTypes:   []string{"png", "jpeg"},

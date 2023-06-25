@@ -1,13 +1,12 @@
-package tests
+package entityfileuploader
 
 import (
-	entityfileuploader "github.com/joegasewicz/entity-file-uploader"
 	"os"
 	"testing"
 )
 
 func TestInit(t *testing.T) {
-	fileUpload := entityfileuploader.FileUpload{
+	fileUpload := FileUpload{
 		UploadDir:   "uploads",
 		MaxFileSize: 10,
 		FileTypes:   []string{"png", "jpeg", "txt"},
