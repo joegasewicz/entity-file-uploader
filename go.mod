@@ -1,3 +1,3 @@
 module github.com/joegasewicz/entity-file-uploader
 
-go 1.16
+go 1.24.1

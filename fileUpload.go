@@ -8,7 +8,7 @@ import (
 type FileUpload struct {
 	UploadDir   string
 	fullDirPath string
-	MaxFileSize uint8
+	MaxFileSize int64
 	FileTypes   []string
 	URL         string
 }
