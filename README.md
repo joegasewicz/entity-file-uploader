@@ -74,6 +74,16 @@ err := CatUpload.Delete(Cat.Avatar, Cat.ID)
 ```
 
 ### Handle file uploads over http for multipart formdata
+First, you need to validate the multipart formdata using `form_validator.ValidateMultiPartForm`.
+For example:
+```go
+if ok := form_validator.ValidateMultiPartForm(c.Request, &formConf); ok {
+    // Passes validation...
+else {
+    // Handle errors
+}
+```
+Now you can upload the file with the specific struct method that handle file uploads with multipart formate:
 ```go
 err := fileManager.ReceiveMultiPartFormDataAndSaveToDir(r, "logo", fileModel.ID)
 ```
