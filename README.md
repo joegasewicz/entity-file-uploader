@@ -44,9 +44,10 @@ func Post(w http.ResponseWriter, r *http.Request) {
         Avatar: avatarFileName,
     }
     result := DB.Create(&Cat)
+    CatID := strconv.Itoa(*Cat.ID)
     // Gorm <<
-	// Upload method takes the UUID of your saved & created entity
-    fileName, err := CatUpload.Upload(w, r, Cat.ID, Cat.Avatar)
+	// Upload method takes the `string` of your saved & created entity
+    fileName, err := CatUpload.Upload(w, r, CatID, Cat.Avatar)
     if err == nil {
     // Handle error
     }
@@ -57,20 +58,20 @@ func Post(w http.ResponseWriter, r *http.Request) {
 ### Fetch the file's filepath
 Gets the full file path including the filename
 ```go
-fileName := CatUpload.Get(Cat.Avatar, Cat.ID)
+fileName := CatUpload.Get(Cat.Avatar, CatID)
 fmt.Println(fileName) // http://localhost:8080/uploads/cats/1/catpic.png
 ```
 
 ### Update a file 
 Updates only the filename not the file (Use `Upload` to update the file)
 ```go
-err := CatUpload.Update(Cat.Avatar, Cat.ID, "tomcat.png")
+err := CatUpload.Update(Cat.Avatar, CatID, "tomcat.png")
 ```
 
 ### Delete a file
 // Deletes the file from the entity file path
 ```go
-err := CatUpload.Delete(Cat.Avatar, Cat.ID)
+err := CatUpload.Delete(Cat.Avatar, CatID)
 ```
 
 ### Handle file uploads over http for multipart formdata
